@@ -1,7 +1,4 @@
 ﻿using CleanArchMvc.Domain.Validation;
-using static System.Net.Mime.MediaTypeNames;
-using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace CleanArchMvc.Domain.Entities
 {
