@@ -31,11 +31,12 @@ namespace CleanArchMvc.Infra.Data.Repositories
             return await _context.Categories.FindAsync(id);
         }
 
-        public async Task<Category> RemoveAsync(Category entity)
+        public async Task<Category> RemoveAsync(int? id)
         {
-            _context.Categories.Remove(entity);
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            return entity;
+            return category;
         }
 
         public async Task<Category> UpdateAsync(Category entity)

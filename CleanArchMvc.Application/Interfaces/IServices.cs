@@ -2,12 +2,12 @@
 
 namespace CleanArchMvc.Domain.Interfaces
 {
-    public interface IRepository<T> where T : EntityBase
+    public interface IServices<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int? id);
-        Task<T> CreateAsync(T entity);
-        Task<T> UpdateAsync(T entity);
-        Task<T> RemoveAsync(int? id);
+        Task CreateAsync(T dto);
+        Task UpdateAsync(T dto);
+        Task RemoveAsync(int? id);
     }
 }

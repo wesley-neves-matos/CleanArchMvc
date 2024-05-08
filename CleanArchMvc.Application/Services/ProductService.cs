@@ -1,0 +1,67 @@
+﻿using AutoMapper;
+using CleanArchMvc.Application.DTOs;
+using CleanArchMvc.Application.Products.Commands;
+using CleanArchMvc.Application.Products.Queries;
+using CleanArchMvc.Domain.Interfaces;
+using MediatR;
+
+namespace CleanArchMvc.Application.Services
+{
+    public class ProductService : IProductService
+    {
+        private IMediator _mediator;
+        private IMapper _mapper;
+
+        public ProductService(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<ProductDTO>> GetAllAsync()
+        {
+            var productsQuery = new GetProductsQuery();
+
+            ValidateEntity(productsQuery);
+
+            var result = await _mediator.Send(productsQuery);
+
+            return _mapper.Map<IEnumerable<ProductDTO>>(result);
+        }
+
+        public async Task<ProductDTO> GetByIdAsync(int? id)
+        {
+            var ProductByIdQuery = new GetProductByIdQuery(id ?? 0);
+
+            ValidateEntity(ProductByIdQuery);
+
+            var result = await _mediator.Send(ProductByIdQuery);
+
+            return _mapper.Map<ProductDTO>(result);
+        }
+
+        public async Task CreateAsync(ProductDTO dto)
+        {
+            var productCreateCommand = _mapper.Map<ProductCreateCommand>(dto);
+            await _mediator.Send(productCreateCommand);
+        }
+
+        public async Task RemoveAsync(int? id)
+        {
+            var productRemoveCommand = new ProductRemoveCommand(id ?? 0);
+            await _mediator.Send(productRemoveCommand);
+        }
+
+        public async Task UpdateAsync(ProductDTO dto)
+        {
+            var productUpdateCommand = _mapper.Map<ProductUpdateCommand>(dto);
+            await _mediator.Send(productUpdateCommand);
+        }
+
+        private static void ValidateEntity(object productsQuery)
+        {
+            if (productsQuery == null)
+                throw new Exception("Entity could not be loaded.");
+        }
+    }
+}
