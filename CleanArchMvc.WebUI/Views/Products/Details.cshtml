@@ -1,0 +1,52 @@
+﻿@model CleanArchMvc.Application.DTOs.ProductDTO
+@{
+    ViewData["Title"] = "Product Details";
+}
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+
+<div class="col-10">
+
+    <dl>
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd>@Html.DisplayFor(model => model.Price)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Stock)</dt>
+        <dd>@Html.DisplayFor(model => model.Stock)</dd>
+
+        <dt>Image</dt>
+        <dd>
+            <div>
+                @{
+                    if (ViewBag.ImageExists)
+                    {
+                        <img src="~/images/@Model.ImageName()" class="rounded-circle" height="200" width="200" alt="Product Image" asp-append-version="true" />
+                    }
+                    else
+                    {
+                        <img src="~/images/noimage.png" class="rounded-circle" height="200" width="200" alt="Not Found Image" asp-append-version="true" />
+                    }
+                }
+            </div>
+        </dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Category)</dt>
+        <dd>@Html.DisplayFor(model => model.Category.Name)</dd>
+    </dl>
+
+    <br />
+
+    <form asp-action="Edit" class="d-flex justify-content-between">
+        <input type="hidden" asp-formaction="Id" />
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Index">Back to List</a>
+    </form>
+
+</div>

@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.min.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.rtl.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.rtl.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.rtl.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap - Copy.rtl.min.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CleanArchMvc.Infra.IoC\CleanArchMvc.Infra.IoC.csproj" />
   </ItemGroup>
 

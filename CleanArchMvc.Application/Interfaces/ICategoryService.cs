@@ -3,7 +3,7 @@ using CleanArchMvc.Domain.Interfaces;
 
 namespace CleanArchMvc.Application.Interfaces
 {
-    public interface ICategoryService : IServices<CategoryDTO>
+    public interface ICategoryService : IEntityService<CategoryDTO>
     {
     }
 }

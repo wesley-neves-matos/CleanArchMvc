@@ -1,10 +1,11 @@
 ﻿using CleanArchMvc.Application.DTOs;
 
-
 namespace CleanArchMvc.Domain.Interfaces
 {
-    public interface IProductService : IServices<ProductDTO>
+    public interface IProductService : IEntityService<ProductDTO>
     {
-        //Task<ProductDTO> GetByIdWithCategoryAsync(int? id);
+        Task DeleteImage(ProductDTO productDTO, string folderPath);
+
+        Task SaveOrUpdateImage(ProductDTO productDTO, string destinationFolderPath);
     }
 }

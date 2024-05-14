@@ -20,7 +20,7 @@
     <div class="col-md-12">
         <div>
             <div class="pull-left">
-                <a asp-action="Create" class="btn btn-primary">
+                <a asp-action="Create" class="btn btn-success">
                     <span title="Register New" class="fas fa-plus"></span> Register new
                 </a>
             </div>
@@ -33,6 +33,9 @@
         <thead>
             <tr>
                 <th>
+                    Image
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
@@ -44,32 +47,39 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Stock)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="text-align: center; vertical-align:middle">
+                        @{
+                        @using CleanArchMvc.Application.DTOs;
+
+                            if (item.ImageExists((string)ViewBag.ImagesFolder))
+                            {
+                                <img src="~/images/@item.ImageName()" class="rounded-circle" height="90" width="90" alt="Product Image" asp-append-version="true" />
+                            }
+                            else
+                            {
+                                <img src="~/images/noimage.png" class="rounded-circle" height="90" width="90" alt="Not Found Image" asp-append-version="true" />
+                            }
+                        }
+                    </td>
+                    <td style="text-align: center; vertical-align:middle">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                    <td>
+                    <td style="text-align: center; vertical-align:middle">
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
-                    <td>
+                    <td style="text-align: center; vertical-align:middle">
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    <td>
+                    <td style="text-align: center; vertical-align:middle">
                         @Html.DisplayFor(modelItem => item.Stock)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Image)
-                    </td>
-                    <td>
+                    <td style="text-align: center; vertical-align:middle">
                         <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
                             <span class="fas fa-edit">Edit</span>
                         </a>

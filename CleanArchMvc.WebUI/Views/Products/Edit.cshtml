@@ -1,0 +1,80 @@
+﻿@model CleanArchMvc.Application.DTOs.ProductDTO
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="row">
+    <div class="col-5">
+        <form asp-action="Edit">
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExtensionImage" class="control-label"></label>
+                <div class="form-control border-0 d-flex justify-content-center">
+                    @{
+                        @using CleanArchMvc.Application.DTOs;
+
+                        if (Model.ImageExists((string)ViewBag.ImagesFolder))
+                        {
+                            <img src="~/images/@Model.ImageName()" class="rounded-circle" width="300" height="300" alt="Product Image" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="~/images/noimage.png" class="rounded-circle" width="300" height="300" alt="Not Found Image" asp-append-version="true" />
+                        }
+                    }
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" asp-route-deleteImage="@true" class="btn btn-danger">Clear Image</a>
+                </div>
+
+                <input asp-for="ExtensionImage" class="form-control col-4" hidden="hidden" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FileToCopyForImage" class="control-label"></label>
+                <input asp-for="FileToCopyForImage" class="form-control" />
+                <span asp-validation-for="FileToCopyForImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="d-flex form-group justify-content-between">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

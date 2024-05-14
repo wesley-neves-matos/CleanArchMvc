@@ -9,36 +9,47 @@ namespace CleanArchMvc.Application.DTOs
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="The Name is required!")]
+        [Required(ErrorMessage = "The Name is required!")]
         [MinLength(3)]
         [MaxLength(100)]
         [DisplayName("Name")]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "The Description is required!")]
         [MinLength(3)]
         [MaxLength(100)]
         [DisplayName("Description")]
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "The Price is required!")]
-        [Column(TypeName ="decimal(18,2)")]
-        [DisplayFormat(DataFormatString ="{0:C2}")]
+        [Column(TypeName = "decimal(18,2)")]
         [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         [DisplayName("Price")]
-        public decimal Price { get; private set; }
+        public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Stock is required!")]
-        [Range(1,9999)]
+        [Range(0, 9999)]
         [DisplayName("Stock")]
-        public int Stock { get; private set; }
+        public int Stock { get; set; }
 
         [MaxLength(250)]
-        [DisplayName("Product Image")]
-        public string Image { get; private set; }
+        [DisplayName("Product Extension Image")]
+        [DataType(DataType.ImageUrl)]
+        public string? ExtensionImage { get; set; }
+
+        [DisplayName("File To Copy For Image")]
+        public string? FileToCopyForImage { get; set; }
 
         [DisplayName("Category")]
+        [Range(1, int.MaxValue, ErrorMessage = "Invalid Category!")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
+
+        public string ImageName()
+        {
+            return $"{Id}{ExtensionImage}";
+        }
+
     }
 }

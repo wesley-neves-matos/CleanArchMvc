@@ -8,21 +8,21 @@ namespace CleanArchMvc.Domain.Entities
         public string Description { get; private set; }
         public decimal Price { get; private set; }
         public int Stock { get; private set; }
-        public string Image { get; private set; }
+        public string? ExtensionImage { get; private set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public Product(string name, string description, decimal price, int stock, string image)
+        public Product(string name, string description, decimal price, int stock, string extensionImage)
         {
-            ValidateDomain(name, description, price, stock, image);
+            ValidateDomain(name, description, price, stock, extensionImage);
         }
 
-        public Product(int id, string name, string description, decimal price, int stock, string image)
+        public Product(int id, string name, string description, decimal price, int stock, string extensionImage)
         {
             ValidateId(id);
 
-            ValidateDomain(name, description, price, stock, image);
+            ValidateDomain(name, description, price, stock, extensionImage);
         }
 
         public void Update(string name, string description, decimal price, int stock, string image, int categoryId)
@@ -39,9 +39,9 @@ namespace CleanArchMvc.Domain.Entities
 
             ValidatePrice(price);
 
-            ValidateStock(price, stock);
+            ValidateStock(stock);
 
-            ValidateImage(image);
+            ValidateExtensionImage(image);
         }
 
         private void ValidateId(int id)
@@ -74,16 +74,16 @@ namespace CleanArchMvc.Domain.Entities
             Price = price;
         }
 
-        private void ValidateStock(decimal price, int stock)
+        private void ValidateStock(int stock)
         {
             DomainExceptionValidation.When(stock < 0, "Invalid stock value, need to be largest to 0!");
-            Price = price;
+            Stock = stock;
         }
 
-        private void ValidateImage(string image)
+        private void ValidateExtensionImage(string image)
         {
-            DomainExceptionValidation.When(image?.Length > 250, "Invalid image name, too long, maximum 250 characters!");
-            Image = image;
+            DomainExceptionValidation.When(image?.Length > 250, "Invalid extension image, too long, maximum 250 characters!");
+            ExtensionImage = image;
         }
     }
 }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CleanArchMvc.Application.Products.Handlers
 {
-    public class ProductCreateCommandHandler : IRequestHandler<ProductCommand, Product>
+    public class ProductCreateCommandHandler : IRequestHandler<ProductCreateCommand, Product>
     {
         private readonly IProductRepository _productRepository;
 
@@ -14,9 +14,9 @@ namespace CleanArchMvc.Application.Products.Handlers
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
-        public async Task<Product> Handle(ProductCommand request, CancellationToken cancellationToken)
+        public async Task<Product> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
         {
-            var product = new Product(request.Name, request.Description, request.Price, request.Stock, request.Image);
+            var product = new Product(request.Name, request.Description, request.Price, request.Stock, request.ExtensionImage);
 
             if(product == null)
             {

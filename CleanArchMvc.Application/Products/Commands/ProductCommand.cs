@@ -1,4 +1,5 @@
-﻿using CleanArchMvc.Domain.Entities;
+﻿
+using CleanArchMvc.Domain.Entities;
 using MediatR;
 
 namespace CleanArchMvc.Application.Products.Commands
@@ -9,7 +10,7 @@ namespace CleanArchMvc.Application.Products.Commands
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public string Image { get; set; }
+        public string ExtensionImage { get; set; }
         public int CategoryId { get; set; }
     }
 }
