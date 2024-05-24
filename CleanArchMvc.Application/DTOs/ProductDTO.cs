@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CleanArchMvc.Application.DTOs
 {
@@ -39,11 +40,14 @@ namespace CleanArchMvc.Application.DTOs
         public string? ExtensionImage { get; set; }
 
         [DisplayName("File To Copy For Image")]
+        [JsonIgnore]
         public string? FileToCopyForImage { get; set; }
 
         [DisplayName("Category")]
         [Range(1, int.MaxValue, ErrorMessage = "Invalid Category!")]
         public int CategoryId { get; set; }
+        
+        [JsonIgnore]
         public Category? Category { get; set; }
 
         public string ImageName()

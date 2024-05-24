@@ -10,17 +10,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CleanArchMvc.Infra.IoC
 {
-    public static class DependencyInjection
+    public static class DependencyInjectionAPI
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureAPI(this IServiceCollection services, IConfiguration configuration)
         {
             IncludeDataContext(services, configuration);
-            
-            ConfigureCookie(services);
 
             IncludeMappings(services);
 
@@ -31,11 +28,6 @@ namespace CleanArchMvc.Infra.IoC
             IncludeIdentity(services);
 
             return services;
-        }
-
-        private static void ConfigureCookie(IServiceCollection services)
-        {
-            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Account/Login");
         }
 
         private static void IncludeIdentity(IServiceCollection services)
@@ -66,7 +58,6 @@ namespace CleanArchMvc.Infra.IoC
         private static void IncludeIdentityMappings(IServiceCollection services)
         {
             services.AddScoped<IAuthenticate, AuthenticateService>();
-            services.AddScoped<IISeedUserRoleInitial, SeedUserRoleInitial>();
         }
 
         private static void IncludeRepositoriesMappings(IServiceCollection services)
