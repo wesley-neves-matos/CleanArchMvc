@@ -1,4 +1,5 @@
 using CleanArchMvc.Infra.IoC;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,11 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructureAPI(builder.Configuration);
 
+// Ative the authentication and valid the token
+builder.Services.AddInfrastructureJWT(builder.Configuration);
+
+builder.Services.AddInfrastructureSwagger();
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -20,6 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStatusCodePages();
 
 app.UseHttpsRedirection();
 

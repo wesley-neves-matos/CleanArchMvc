@@ -27,7 +27,7 @@ namespace CleanArchMvc.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authentication.Authenticate(model.Email, model.Password);
+                var result = await _authentication.AuthenticateAsync(model.Email, model.Password);
 
                 if (result)
                 {
@@ -58,7 +58,7 @@ namespace CleanArchMvc.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var result = await _authentication.RegisterUser(model.Email, model.Password);
+            var result = await _authentication.RegisterUserAsync(model.Email, model.Password);
 
             if (result)
             {
@@ -73,7 +73,7 @@ namespace CleanArchMvc.WebUI.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _authentication.Logout();
+            await _authentication.LogoutAsync();
             return Redirect("/Account/Login");
         }
     }
